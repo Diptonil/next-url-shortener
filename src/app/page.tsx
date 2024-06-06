@@ -5,8 +5,9 @@ import { useState } from "react";
 
 
 export default function Home() {
-	const [url, setUrl] = useState("");
-	const [link, setLink] = useState("");
+	const [url, setUrl] = useState<string>("");
+	const [link, setLink] = useState<string>("");
+	const [copied, setCopied] = useState<boolean>(false);
 
 	async function convert(e: React.MouseEvent) {
 		e.preventDefault();
@@ -17,8 +18,17 @@ export default function Home() {
 			},
 			body: JSON.stringify({"data": url})
 		});
-		const link = (await data.json()).data.link;		
+		const link = "http://localhost/go/" + (await data.json()).data.link;		
 		setLink(link);
+		setCopied(false);
+	}
+
+	function copyToClipboard() {
+		navigator.clipboard.writeText(link);
+		setCopied(true);
+		setTimeout(function () {
+			setCopied(false);
+		}, 3000);
 	}
 
     return (
@@ -35,13 +45,16 @@ export default function Home() {
 				/>
 				<button onClick={convert} className="rounded-md slate-950 mt-6 bg-pink-800 px-8 py-4">Convert</button>
 				{link && (
-					<p className="mt-4 text-gray-300">
-					Shortened Link: <a href={link} className="text-pink-500 hover:underline">{link}</a>
-					</p>
+					<div className="mt-4 flex items-center text-gray-300">
+						<span>
+						Shortened Link: <a href={link} className="text-pink-500 hover:underline">{link}</a>
+						</span>
+						<button onClick={copyToClipboard} className="ml-2 bg-pink-500 hover:bg-pink-700 text-white text-xs px-2 py-1 rounded">Copy</button>
+						{copied && <span className="ml-2 text-green-500">Copied!</span>}
+				  </div>
 				)}
 				</div>
 			</div>
 		</main>
-
     );
 }
