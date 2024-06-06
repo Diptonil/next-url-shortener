@@ -24,11 +24,22 @@ export async function POST(request: NextRequest) {
         if (!url) {
             return new ErrorResponse("No URLs passed. Nothing to return.", ResponseStatusCode.ResourceNotFound).respond();
         }
-        const shortenedURL = shortenURL();
-        console.log(shortenedURL);
-        
-        await redis.set(shortenedURL, url);
-        return new SuccessResponse({"data": shortenedURL}, "URL successfully shortened.", ResponseStatusCode.OK).respond();
+        const shortenedURL = shortenURL();        
+        await redis.hset("links", {[shortenedURL]: url});
+        return new SuccessResponse({"link": shortenedURL}, "URL successfully shortened.", ResponseStatusCode.OK).respond();
+    } catch (err: any) {
+        return new ErrorResponse(err.message, ResponseStatusCode.InternalServerError).respond();
+    }
+}
+
+
+export async function GET() {
+    try {
+        const links = await redis.hgetall("links");
+        if (!links) {
+            return new ErrorResponse("No links found.", ResponseStatusCode.ResourceNotFound).respond();
+        }
+        return new SuccessResponse({"links": links}, "URL successfully shortened.", ResponseStatusCode.OK).respond();
     } catch (err: any) {
         return new ErrorResponse(err.message, ResponseStatusCode.InternalServerError).respond();
     }
