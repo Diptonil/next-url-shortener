@@ -7,9 +7,16 @@ import { useState } from "react";
 export default function Home() {
 	const [url, setUrl] = useState("");
 
-	function convert(e: React.MouseEvent) {
+	async function convert(e: React.MouseEvent) {
 		e.preventDefault();
-		console.log(url);
+		const data = await fetch("api/shorten", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({url})
+		});
+		console.log(data);
 	}
 
     return (
