@@ -9,12 +9,12 @@ export default function Home() {
 
 	async function convert(e: React.MouseEvent) {
 		e.preventDefault();
-		const data = await fetch("api/shorten", {
+		const data = await fetch("api/link", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({url})
+			body: JSON.stringify({"data": url})
 		});
 		console.log(data);
 	}

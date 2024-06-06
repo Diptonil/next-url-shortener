@@ -1,6 +1,7 @@
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 import { ResponseStatusCode } from "@/utils/enums";
 import { SuccessResponse, ErrorResponse } from "@/utils/responses";
+import { redis } from "@/utils/redis";
 
 
 function shortenURL() {
@@ -17,18 +18,18 @@ function shortenURL() {
 }
 
 
-export function POST(request: NextApiRequest) {
+export async function POST(request: NextRequest) {
     try {
-        const { url } = request.body;
-        console.log(url);
-        
+        const url = (await request.json()).data;        
         if (!url) {
-            return new SuccessResponse({}, "No URLs passed. Nothing to return.", ResponseStatusCode.NoContent).respond();
+            return new ErrorResponse("No URLs passed. Nothing to return.", ResponseStatusCode.ResourceNotFound).respond();
         }
-        return new SuccessResponse({"data": shortenURL()}, "URL successfully shortened.", ResponseStatusCode.OK).respond();
-    } catch (err: any) {
-        console.log(err.message);
+        const shortenedURL = shortenURL();
+        console.log(shortenedURL);
         
+        await redis.set(shortenedURL, url);
+        return new SuccessResponse({"data": shortenedURL}, "URL successfully shortened.", ResponseStatusCode.OK).respond();
+    } catch (err: any) {
         return new ErrorResponse(err.message, ResponseStatusCode.InternalServerError).respond();
     }
 }
