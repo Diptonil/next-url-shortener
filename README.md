@@ -14,4 +14,4 @@ A basic URL shortener service to distribute and handle easily manageable links.
 - [ ] Fix Navbar.
 - [ ] Show actual domain of the app rather than localhost when link gets generated.
 - [ ] Deployment.
-- [ ] Footer.
+- [x] Footer.

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ResponseStatusCode } from "@/utils/enums";
-import { ErrorResponse } from "@/utils/responses";
-import { redis } from "@/utils/redis";
+import { ResponseStatusCode } from "@/lib/enums";
+import { ErrorResponse } from "@/lib/responses";
+import { redis } from "@/lib/redis";
 
 
 function getValidUrl(link: string) {

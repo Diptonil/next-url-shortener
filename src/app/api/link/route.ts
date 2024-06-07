@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
-import { logger } from "@/utils/logger";
-import { ResponseStatusCode } from "@/utils/enums";
-import { SuccessResponse, ErrorResponse } from "@/utils/responses";
-import { redis } from "@/utils/redis";
+import { logger } from "@/lib/logger";
+import { ResponseStatusCode } from "@/lib/enums";
+import { SuccessResponse, ErrorResponse } from "@/lib/responses";
+import { redis } from "@/lib/redis";
 
 
 function shortenURL() {
