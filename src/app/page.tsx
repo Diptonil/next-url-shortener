@@ -34,7 +34,7 @@ export default function Home() {
     return (
         <main className="min-h-screen">
 			<Navbar />
-			<div className="flex items-center justify-center min-h-[calc(100vh-64px)]"> {/* Adjust min-h based on the navbar height */}
+			<div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
 				<div className="mb-6 justify-center items-center flex flex-col">
 				<label className="block mb-2 text-sm font-medium text-gray-300">Link</label>
 				<input
