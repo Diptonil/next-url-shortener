@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { logger } from "@/utils/logger";
 import { ResponseStatusCode } from "@/utils/enums";
 import { SuccessResponse, ErrorResponse } from "@/utils/responses";
 import { redis } from "@/utils/redis";
@@ -39,6 +40,7 @@ export async function GET() {
         if (!links) {
             return new ErrorResponse("No links found.", ResponseStatusCode.ResourceNotFound).respond();
         }
+        logger.info(links);
         return new SuccessResponse({"links": links}, "URL successfully shortened.", ResponseStatusCode.OK).respond();
     } catch (err: any) {
         return new ErrorResponse(err.message, ResponseStatusCode.InternalServerError).respond();

@@ -14,8 +14,6 @@ function getValidUrl(link: string) {
 
 export async function middleware(request: NextRequest) {
     try {
-        console.log("hi");
-        
         const shortenedLink = request.nextUrl.pathname.split("/").pop();
         if (shortenedLink) {
             const url: string | null = await redis.hget("links", shortenedLink);
