@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from 'next/link';
 
 
-export function Navbar() {
+export default function Navbar() {
     return (
         <nav className="bg-transparent border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

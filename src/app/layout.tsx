@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Footer from "@/components/footer";
 import "./globals.css";
 
 
@@ -15,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-r from-slate-950 to-black">{children}</body>
+      <body className="bg-gradient-to-r from-slate-950 to-black">
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
