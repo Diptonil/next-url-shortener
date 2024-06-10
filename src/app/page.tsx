@@ -11,7 +11,7 @@ export default function Home() {
 
 	async function convert(e: React.MouseEvent) {
 		e.preventDefault();
-		const data = await fetch("api/link", {
+		const data = await fetch("api/links", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

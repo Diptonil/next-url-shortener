@@ -2,6 +2,7 @@ export enum ResponseStatusCode {
     OK = 200,
     ResourceCreated = 201,
     NoContent = 204,
+    BadRequest = 400,
     Unauthorized = 403,
     ResourceNotFound = 404,
     ResourceAlreadyExists = 409,

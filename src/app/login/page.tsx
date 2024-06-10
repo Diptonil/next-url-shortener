@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 
 export default function Login() {
@@ -6,7 +7,7 @@ export default function Login() {
         <div className="min-h-screen bg-transparent flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-pink-600">Sign in to your account</h2>
-                <p className="mt-2 text-center text-sm text-gray-400 max-w">Or <a href="#" className="font-medium text-gray-300 hover:text-white">create</a> an account.</p>
+                <p className="mt-2 text-center text-sm text-gray-400 max-w">Or <Link href="#" className="font-medium text-gray-300 hover:text-white">create</Link> an account.</p>
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
